@@ -1,0 +1,21 @@
+{% extends 'tercera_entrega_app/base.html' %}
+
+{% block content %}
+<h2>Buscar Cliente</h2>
+<form method="get" action="{% url 'buscar_cliente' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Buscar</button>
+</form>
+
+{% if clientes %}
+    <h3>Resultados:</h3>
+    <ul>
+        {% for cliente in clientes %}
+            <li>{{ cliente.nombre }} - {{ cliente.email }}</li>
+        {% endfor %}
+    </ul>
+{% elif clientes is not None %}
+    <p>No se encontraron resultados.</p>
+{% endif %}
+{% endblock %}
